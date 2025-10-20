@@ -1,8 +1,8 @@
 import PageLayout from "@/components/PageLayout";
 import { Building2, Leaf, Wheat } from "lucide-react";
-import agriTech from "@/assets/agri-tech.jpg";
-import landRehab from "@/assets/land-rehab.jpg";
-import communityGarden from "@/assets/community-garden.jpg";
+import agriHoldings from "@/assets/agri-holdings.jpg";
+import landRestoration from "@/assets/land-restoration.jpg";
+import foodGardens from "@/assets/food-gardens.jpg";
 
 const Ventures = () => {
   const ventures = [
@@ -17,7 +17,7 @@ const Ventures = () => {
         "Strategic partnerships",
         "Market access solutions",
       ],
-      image: agriTech,
+      image: agriHoldings,
     },
     {
       icon: Leaf,
@@ -29,7 +29,7 @@ const Ventures = () => {
         "Coal ash beneficiation",
         "Green economy solutions",
       ],
-      image: landRehab,
+      image: landRestoration,
     },
     {
       icon: Wheat,
@@ -42,7 +42,7 @@ const Ventures = () => {
         "Zero hunger programs",
         "Community training",
       ],
-      image: communityGarden,
+      image: foodGardens,
     },
   ];
 

@@ -1,5 +1,5 @@
 import PageLayout from "@/components/PageLayout";
-import { Sprout, Users, LandPlot, Award } from "lucide-react";
+import { Sprout, Users, LandPlot, Award, GraduationCap, Globe, TrendingUp, Trophy } from "lucide-react";
 import modernFarm from "@/assets/modern-farm.jpg";
 import founderImage from "@/assets/founder-placeholder.jpg";
 
@@ -23,10 +23,22 @@ const About = () => {
   ];
 
   const achievements = [
-    "USDA Cochran Fellow",
-    "World Bank Programme Participant",
-    "Tuks Prestigious Leadership Programme",
-    "Member of Golden Key International Honour Society",
+    {
+      icon: Globe,
+      title: "USDA Cochran Fellow",
+    },
+    {
+      icon: TrendingUp,
+      title: "World Bank Programme Participant",
+    },
+    {
+      icon: GraduationCap,
+      title: "Tuks Prestigious Leadership Programme",
+    },
+    {
+      icon: Trophy,
+      title: "Member of Golden Key International Honour Society",
+    },
   ];
 
   return (
@@ -147,10 +159,13 @@ const About = () => {
             {achievements.map((achievement, index) => (
               <div
                 key={index}
-                className="bg-primary-foreground/10 backdrop-blur-sm p-6 rounded-lg animate-fade-in"
+                className="bg-primary-foreground/10 backdrop-blur-sm p-6 rounded-lg animate-fade-in flex flex-col items-center gap-4"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <p className="font-medium">{achievement}</p>
+                <div className="w-12 h-12 bg-primary-foreground/20 rounded-full flex items-center justify-center">
+                  <achievement.icon className="text-primary-foreground" size={24} />
+                </div>
+                <p className="font-medium text-center">{achievement.title}</p>
               </div>
             ))}
           </div>

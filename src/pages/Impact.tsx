@@ -1,5 +1,12 @@
 import PageLayout from "@/components/PageLayout";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Building, School, Factory, Tractor, Users, Globe } from "lucide-react";
+import mandelaGardens from "@/assets/mandela-gardens.jpg";
+import coalAshFacility from "@/assets/coal-ash-facility.jpg";
+import researchCenter from "@/assets/research-center.jpg";
+import bokamosoProject from "@/assets/bokamoso-project.jpg";
+import foundationTraining from "@/assets/foundation-training.jpg";
+import digitalPlatform from "@/assets/digital-platform.jpg";
 
 const Impact = () => {
   const projects = [
@@ -7,41 +14,65 @@ const Impact = () => {
       title: "A Million Food Gardens for Mandela Day",
       description:
         "Co-founded with Ndaba Mandela, establishing community gardens across South Africa to fight food insecurity and honor Nelson Mandela's legacy.",
+      image: mandelaGardens,
     },
     {
       title: "AgriMintech: Coal Ash Beneficiation",
       description:
         "Climate-smart partnership with Eskom transforming coal ash into fertile soil for mine land rehabilitation.",
+      image: coalAshFacility,
     },
     {
       title: "Centre of Mined Land Rehabilitation",
       description:
         "Research & training collaboration with University of Pretoria, focusing on sustainable land restoration.",
+      image: researchCenter,
     },
     {
       title: "Bokamoso Ba Rona Agricultural Project",
       description:
         "Consulting for Sibanye Stillwater's 30,000-hectare agricultural project, promoting sustainable large-scale farming.",
+      image: bokamosoProject,
     },
     {
       title: "Dr Sam Motsuenyane Foundation",
       description:
         "Chairpersonship guiding farmer empowerment, entrepreneurship, and agricultural education.",
+      image: foundationTraining,
     },
     {
       title: "safoodgardens.org Platform",
       description:
         "Digital zero-hunger platform connecting communities with food garden resources and data-driven support.",
+      image: digitalPlatform,
     },
   ];
 
   const partners = [
-    "University of Pretoria Enterprise",
-    "National House of Traditional Leaders",
-    "Agricultural Business Chamber (Agbiz)",
-    "South African Agricultural Development Agency (AGDA)",
-    "Tiger Brands Foundation (Dipuno)",
-    "Institute of Directors South Africa (IoDSA)",
+    {
+      name: "University of Pretoria Enterprise",
+      icon: School,
+    },
+    {
+      name: "National House of Traditional Leaders",
+      icon: Users,
+    },
+    {
+      name: "Agricultural Business Chamber (Agbiz)",
+      icon: Building,
+    },
+    {
+      name: "South African Agricultural Development Agency (AGDA)",
+      icon: Tractor,
+    },
+    {
+      name: "Tiger Brands Foundation (Dipuno)",
+      icon: Factory,
+    },
+    {
+      name: "Institute of Directors South Africa (IoDSA)",
+      icon: Globe,
+    },
   ];
 
   return (
@@ -63,9 +94,14 @@ const Impact = () => {
             {projects.map((project, index) => (
               <Card
                 key={index}
-                className="card-hover animate-fade-in"
+                className="card-hover animate-fade-in overflow-hidden"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-48 object-cover"
+                />
                 <CardHeader>
                   <CardTitle className="text-xl">{project.title}</CardTitle>
                 </CardHeader>
@@ -88,18 +124,20 @@ const Impact = () => {
             Working with leading organizations to drive agricultural innovation across Africa
           </p>
 
-          {/* Logo Carousel */}
-          <div className="relative overflow-hidden bg-card rounded-lg shadow-md py-8">
-            <div className="flex animate-scroll space-x-12">
-              {[...partners, ...partners].map((partner, index) => (
-                <div
-                  key={index}
-                  className="flex-shrink-0 w-64 h-24 bg-secondary/50 rounded-lg flex items-center justify-center px-6"
-                >
-                  <p className="text-sm font-medium text-center text-foreground">{partner}</p>
+          {/* Partner Icons */}
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+            {partners.map((partner, index) => (
+              <div
+                key={index}
+                className="flex flex-col items-center gap-4 animate-fade-in"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center">
+                  <partner.icon className="text-primary" size={32} />
                 </div>
-              ))}
-            </div>
+                <p className="text-sm font-medium text-center text-foreground">{partner.name}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>

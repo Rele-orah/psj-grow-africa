@@ -1,32 +1,34 @@
 import PageLayout from "@/components/PageLayout";
-import { Leaf, Target, Users2, MessageSquare } from "lucide-react";
-import trainingImage from "@/assets/training-workshop.jpg";
+import climateSmart from "@/assets/climate-smart.jpg";
+import foodSecurity from "@/assets/food-security.jpg";
+import youthEmpowerment from "@/assets/youth-empowerment.jpg";
+import thoughtLeadership from "@/assets/thought-leadership.jpg";
 
 const Sustainability = () => {
   const initiatives = [
     {
-      icon: Leaf,
       title: "Climate Smart Agriculture",
       description:
         "Leading coal ash beneficiation and sustainable farming practices that restore degraded lands while increasing productivity.",
+      image: climateSmart,
     },
     {
-      icon: Target,
       title: "Food Security & Zero Hunger",
       description:
         "Addressing food insecurity through safoodgardens.org and A Million Food Gardens, aligned with UN Sustainable Development Goal 2 (Zero Hunger).",
+      image: foodSecurity,
     },
     {
-      icon: Users2,
       title: "Youth Empowerment",
       description:
         "Providing training, mentorship, and career pathways for young African farmers and agri-leaders.",
+      image: youthEmpowerment,
     },
     {
-      icon: MessageSquare,
       title: "Thought Leadership",
       description:
         "Paul Ntshabele as speaker, advocate, and policy contributor on land reform and agricultural transformation.",
+      image: thoughtLeadership,
     },
   ];
 
@@ -44,36 +46,37 @@ const Sustainability = () => {
         </div>
       </section>
 
-      {/* Image Banner */}
-      <section className="relative h-96 overflow-hidden">
-        <img
-          src={trainingImage}
-          alt="Community Training"
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent" />
-      </section>
-
       {/* Initiatives */}
       <section className="section-padding bg-background">
         <div className="container-custom">
-          <div className="grid md:grid-cols-2 gap-12">
+          <div className="space-y-16">
             {initiatives.map((initiative, index) => (
               <div
                 key={index}
-                className="flex gap-6 animate-fade-in"
-                style={{ animationDelay: `${index * 0.1}s` }}
+                className={`grid md:grid-cols-2 gap-8 items-center ${
+                  index % 2 === 1 ? "md:flex-row-reverse" : ""
+                }`}
               >
-                <div className="flex-shrink-0 w-16 h-16 bg-primary/10 rounded-lg flex items-center justify-center">
-                  <initiative.icon className="text-primary" size={32} />
-                </div>
-                <div>
-                  <h3 className="text-2xl font-semibold text-foreground mb-3">
+                <div
+                  className={`animate-fade-in ${index % 2 === 1 ? "md:order-2" : ""}`}
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                >
+                  <h3 className="text-2xl md:text-3xl font-semibold text-foreground mb-4">
                     {initiative.title}
                   </h3>
                   <p className="text-lg text-muted-foreground leading-relaxed">
                     {initiative.description}
                   </p>
+                </div>
+                <div
+                  className={`animate-fade-in ${index % 2 === 1 ? "md:order-1" : ""}`}
+                  style={{ animationDelay: `${index * 0.15}s` }}
+                >
+                  <img
+                    src={initiative.image}
+                    alt={initiative.title}
+                    className="rounded-lg shadow-xl w-full h-auto"
+                  />
                 </div>
               </div>
             ))}

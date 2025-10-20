@@ -72,37 +72,38 @@ const News = () => {
         </div>
       </section>
 
-      {/* Articles Grid */}
+      {/* Articles List */}
       <section className="section-padding bg-background">
         <div className="container-custom">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="max-w-4xl mx-auto space-y-8">
             {articles.map((article, index) => (
-              <Card
+              <a
                 key={index}
-                className="card-hover animate-fade-in flex flex-col"
+                href={article.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block animate-fade-in group"
                 style={{ animationDelay: `${index * 0.05}s` }}
               >
-                <CardHeader className="flex-1">
-                  <CardTitle className="text-lg leading-tight">{article.title}</CardTitle>
+                <article className="border-l-4 border-primary pl-6 py-4 hover:bg-secondary/20 transition-colors rounded-r-lg">
+                  <h3 className="text-xl font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
+                    {article.title}
+                  </h3>
                   {article.author && (
-                    <CardDescription className="text-sm">by {article.author}</CardDescription>
+                    <p className="text-sm text-muted-foreground mb-3">by {article.author}</p>
                   )}
-                </CardHeader>
-                <CardContent className="space-y-3">
-                  <div className="space-y-1">
-                    <p className="text-sm font-medium text-primary">{article.publication}</p>
+                  <div className="flex items-center gap-4 text-sm">
+                    <span className="font-medium text-primary">{article.publication}</span>
                     {article.date && (
-                      <p className="text-xs text-muted-foreground">{article.date}</p>
+                      <>
+                        <span className="text-muted-foreground">•</span>
+                        <span className="text-muted-foreground">{article.date}</span>
+                      </>
                     )}
+                    <ExternalLink className="ml-auto text-muted-foreground group-hover:text-primary transition-colors" size={16} />
                   </div>
-                  <a href={article.url} target="_blank" rel="noopener noreferrer">
-                    <Button variant="outline" size="sm" className="w-full">
-                      Read Article
-                      <ExternalLink className="ml-2" size={14} />
-                    </Button>
-                  </a>
-                </CardContent>
-              </Card>
+                </article>
+              </a>
             ))}
           </div>
         </div>
