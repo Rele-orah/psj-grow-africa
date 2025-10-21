@@ -1,5 +1,5 @@
 import PageLayout from "@/components/PageLayout";
-import { Mail, Globe, MapPin } from "lucide-react";
+import { Mail, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -122,22 +122,6 @@ const Contact = () => {
                       className="text-muted-foreground hover:text-primary transition-colors"
                     >
                       info@psjgroup.co.za
-                    </a>
-                  </div>
-                </div>
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <Globe className="text-primary" size={24} />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-foreground mb-1">Website</h3>
-                    <a
-                      href="https://paulntshabele.co.za"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-muted-foreground hover:text-primary transition-colors"
-                    >
-                      paulntshabele.co.za
                     </a>
                   </div>
                 </div>
