@@ -1,7 +1,11 @@
 import PageLayout from "@/components/PageLayout";
-import { Sprout, Users, LandPlot, Award, GraduationCap, Globe, TrendingUp, Trophy } from "lucide-react";
-import modernFarm from "@/assets/modern-farm.jpg";
+import { Sprout, Users, LandPlot, Award } from "lucide-react";
+import officeBuilding from "@/assets/office-building.jpg";
 import founderImage from "@/assets/founder-placeholder.jpg";
+import usdaCochranLogo from "@/assets/logos/usda-cochran.png";
+import worldBankLogo from "@/assets/logos/world-bank.png";
+import tuksLeadershipLogo from "@/assets/logos/tuks-leadership.png";
+import goldenKeyLogo from "@/assets/logos/golden-key.png";
 
 const About = () => {
   const focusAreas = [
@@ -24,20 +28,20 @@ const About = () => {
 
   const achievements = [
     {
-      icon: Globe,
-      title: "USDA Cochran Fellow",
+      logo: usdaCochranLogo,
+      title: "USDA Cochran Fellowship",
     },
     {
-      icon: TrendingUp,
+      logo: worldBankLogo,
       title: "World Bank Programme Participant",
     },
     {
-      icon: GraduationCap,
+      logo: tuksLeadershipLogo,
       title: "Tuks Prestigious Leadership Programme",
     },
     {
-      icon: Trophy,
-      title: "Member of Golden Key International Honour Society",
+      logo: goldenKeyLogo,
+      title: "Golden Key International Honour Society",
     },
   ];
 
@@ -68,8 +72,8 @@ const About = () => {
             </div>
             <div className="animate-fade-in">
               <img
-                src={modernFarm}
-                alt="Modern Sustainable Farm"
+                src={officeBuilding}
+                alt="PSJ Group modern glass office building headquarters"
                 className="rounded-lg shadow-xl w-full h-auto"
               />
             </div>
@@ -143,29 +147,35 @@ const About = () => {
       </section>
 
       {/* Recognition & Achievements */}
-      <section className="section-padding bg-primary text-primary-foreground">
-        <div className="container-custom text-center">
-          <div className="flex justify-center mb-6">
+      <section className="section-padding bg-primary/5">
+        <div className="container-custom">
+          <div className="flex justify-center mb-6 text-primary">
             <Award size={48} />
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground text-center mb-6">
             Recognition & Achievements
           </h2>
-          <p className="text-xl text-primary-foreground/90 mb-8 max-w-3xl mx-auto">
+          <p className="text-lg text-muted-foreground text-center mb-12 max-w-3xl mx-auto">
             Paul Ntshabele's work has been recognized nationally and internationally for advancing
             sustainable agriculture.
           </p>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
+          <div className="grid sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
             {achievements.map((achievement, index) => (
               <div
                 key={index}
-                className="bg-primary-foreground/10 backdrop-blur-sm p-6 rounded-lg animate-fade-in flex flex-col items-center gap-4"
+                className="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 animate-fade-in"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <div className="w-12 h-12 bg-primary-foreground/20 rounded-full flex items-center justify-center">
-                  <achievement.icon className="text-primary-foreground" size={24} />
+                <div className="flex flex-col items-center text-center gap-4">
+                  <div className="w-20 h-20 flex items-center justify-center">
+                    <img
+                      src={achievement.logo}
+                      alt={`${achievement.title} logo`}
+                      className="w-full h-full object-contain"
+                    />
+                  </div>
+                  <p className="font-semibold text-foreground">{achievement.title}</p>
                 </div>
-                <p className="font-medium text-center">{achievement.title}</p>
               </div>
             ))}
           </div>

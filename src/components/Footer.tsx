@@ -12,17 +12,17 @@ const Footer = () => {
   ];
 
   const initiatives = [
-    { label: "safoodgardens.org", url: "https://safoodgardens.org" },
-    { label: "AgriMintech", url: "#" },
-    { label: "Land Rehabilitation Company", url: "#" },
-    { label: "Centre of Mined Land Rehabilitation", url: "#" },
-    { label: "Dr Sam Motsuenyane Foundation", url: "#" },
+    "safoodgardens.org",
+    "AgriMintech",
+    "Land Rehabilitation Company",
+    "Centre of Mined Land Rehabilitation",
+    "Dr Sam Motsuenyane Foundation",
   ];
 
   return (
     <footer className="bg-primary text-primary-foreground">
       <div className="container-custom section-padding">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
           {/* About Section */}
           <div>
             <div className="flex items-center space-x-3 mb-4">
@@ -62,22 +62,22 @@ const Footer = () => {
             <h3 className="text-lg font-semibold mb-4">Key Initiatives</h3>
             <ul className="space-y-2">
               {initiatives.map((initiative) => (
-                <li key={initiative.label}>
-                  {initiative.url.startsWith("http") ? (
-                    <a
-                      href={initiative.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-sm text-primary-foreground/80 hover:text-primary-foreground transition-colors"
-                    >
-                      {initiative.label}
-                    </a>
-                  ) : (
-                    <span className="text-sm text-primary-foreground/80">{initiative.label}</span>
-                  )}
+                <li key={initiative}>
+                  <span className="text-sm text-primary-foreground/80">{initiative}</span>
                 </li>
               ))}
             </ul>
+          </div>
+
+          {/* Contact Information */}
+          <div>
+            <h3 className="text-lg font-semibold mb-4">Contact Us</h3>
+            <a 
+              href="mailto:info@psjgroup.co.za"
+              className="text-sm text-primary-foreground/80 hover:text-primary-foreground transition-colors"
+            >
+              info@psjgroup.co.za
+            </a>
           </div>
         </div>
 
