@@ -1,12 +1,19 @@
 import PageLayout from "@/components/PageLayout";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Building, School, Factory, Tractor, Users, Globe } from "lucide-react";
+import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import mandelaGardens from "@/assets/mandela-gardens.jpg";
 import coalAshFacility from "@/assets/coal-ash-facility.jpg";
 import researchCenter from "@/assets/research-center.jpg";
 import bokamosoProject from "@/assets/bokamoso-project.jpg";
 import foundationTraining from "@/assets/foundation-training.jpg";
 import digitalPlatform from "@/assets/digital-platform.jpg";
+import upEnterpriseLogo from "@/assets/logos/up-enterprise.png";
+import nhtlLogo from "@/assets/logos/nhtl.png";
+import agbizLogo from "@/assets/logos/agbiz.png";
+import agdaLogo from "@/assets/logos/agda.png";
+import tigerBrandsLogo from "@/assets/logos/tiger-brands.png";
+import iodsaLogo from "@/assets/logos/iodsa.png";
+import { useEffect, useRef } from "react";
 
 const Impact = () => {
   const projects = [
@@ -51,29 +58,70 @@ const Impact = () => {
   const partners = [
     {
       name: "University of Pretoria Enterprise",
-      icon: School,
+      logo: upEnterpriseLogo,
     },
     {
       name: "National House of Traditional Leaders",
-      icon: Users,
+      logo: nhtlLogo,
     },
     {
       name: "Agricultural Business Chamber (Agbiz)",
-      icon: Building,
+      logo: agbizLogo,
     },
     {
       name: "South African Agricultural Development Agency (AGDA)",
-      icon: Tractor,
+      logo: agdaLogo,
     },
     {
       name: "Tiger Brands Foundation (Dipuno)",
-      icon: Factory,
+      logo: tigerBrandsLogo,
     },
     {
       name: "Institute of Directors South Africa (IoDSA)",
-      icon: Globe,
+      logo: iodsaLogo,
     },
   ];
+
+  const carouselRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const carousel = carouselRef.current;
+    if (!carousel) return;
+
+    let scrollInterval: NodeJS.Timeout;
+    let isPaused = false;
+
+    const startScroll = () => {
+      scrollInterval = setInterval(() => {
+        if (!isPaused && carousel) {
+          carousel.scrollLeft += 1;
+          // Reset to start when reaching the end
+          if (carousel.scrollLeft >= carousel.scrollWidth - carousel.clientWidth) {
+            carousel.scrollLeft = 0;
+          }
+        }
+      }, 20);
+    };
+
+    const handleMouseEnter = () => {
+      isPaused = true;
+    };
+
+    const handleMouseLeave = () => {
+      isPaused = false;
+    };
+
+    carousel.addEventListener("mouseenter", handleMouseEnter);
+    carousel.addEventListener("mouseleave", handleMouseLeave);
+
+    startScroll();
+
+    return () => {
+      clearInterval(scrollInterval);
+      carousel?.removeEventListener("mouseenter", handleMouseEnter);
+      carousel?.removeEventListener("mouseleave", handleMouseLeave);
+    };
+  }, []);
 
   return (
     <PageLayout>
@@ -115,7 +163,7 @@ const Impact = () => {
       </section>
 
       {/* Partners Section */}
-      <section className="section-padding bg-secondary/30">
+      <section className="section-padding bg-secondary/30 overflow-hidden">
         <div className="container-custom text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
             Collaborating for Sustainable Agricultural Transformation
@@ -124,20 +172,35 @@ const Impact = () => {
             Working with leading organizations to drive agricultural innovation across Africa
           </p>
 
-          {/* Partner Icons */}
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            {partners.map((partner, index) => (
-              <div
-                key={index}
-                className="flex flex-col items-center gap-4 animate-fade-in"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center">
-                  <partner.icon className="text-primary" size={32} />
+          {/* Auto-scrolling Partner Logos Carousel */}
+          <div className="relative">
+            <div
+              ref={carouselRef}
+              className="flex gap-12 overflow-x-hidden py-8"
+              style={{
+                maskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
+                WebkitMaskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
+              }}
+            >
+              {/* Duplicate partners for infinite scroll effect */}
+              {[...partners, ...partners, ...partners].map((partner, index) => (
+                <div
+                  key={index}
+                  className="flex-shrink-0 flex flex-col items-center gap-4 group cursor-pointer transition-transform hover:scale-105"
+                >
+                  <div className="bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow w-64 h-32 flex items-center justify-center">
+                    <img
+                      src={partner.logo}
+                      alt={`${partner.name} logo`}
+                      className="max-h-full max-w-full object-contain"
+                    />
+                  </div>
+                  <p className="text-sm font-medium text-center text-foreground max-w-[16rem] group-hover:text-primary transition-colors">
+                    {partner.name}
+                  </p>
                 </div>
-                <p className="text-sm font-medium text-center text-foreground">{partner.name}</p>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>
